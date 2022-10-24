@@ -10,6 +10,7 @@ pipeline {
         stage('docker-build') {
             steps {
                 sh '''
+                sudo chmod 666 /var/run/docker.sock
                 cd application
                 docker-compose build
                 '''
@@ -46,10 +47,13 @@ pipeline {
         }
         failure{
             echo "Build $env.BUILD_NUMBER has failed."
-            mail bcc: '', cc: '', from: 'no-reply@jenkins', replyTo: '',  
-                 body: """ Tests input in the atteched file.\nFor more information, check console output at 
-                 <a href="${env.BUILD_URL}">${env.JOB_NAME}</a>""",  subject: "Status of  ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} ", 
-                 to: 'ofer.rvd@gmail.com'
+            // mail bcc: '', cc: '', from: 'no-reply@jenkins', replyTo: '',  
+            //      body: """ Tests input in the atteched file.\nFor more information, check console output at 
+            //      <a href="${env.BUILD_URL}">${env.JOB_NAME}</a>""",  subject: "Status of  ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} ", 
+            //      to: 'ofer.rvd@gmail.com'
+            // emailext body: 'Check console output at $BUILD_URL to view the results. /n/n ${CHANGES} /n/n -------------------------------------------------- /n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+            //         to: "ofer.rvd@gmail.com", 
+            //         subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
         }
     }
 }
