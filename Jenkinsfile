@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    stages {
+        // stage('checkout') {
+        //     steps {
+        //         deleteDir()
+        //         checkout scm
+        //     }
+        // }
+        stage('docker-build') {
+            steps {
+                sh '''
+                cd applications
+                docker-compose build
+                '''
+            }
+        }
+        stage('e2e-test') {
+            steps {
+                sh "./scripts/e2e-test.sh"
+            }
+        }
+        stage('tag') {
+            steps {
+                sh "exit 1"
+            }
+        }
+        // stage('publish') {
+        //     steps {
+        //         sh "./scripts/publish2ecr.sh"
+        //     }
+        // }
+        // stage('deploy') {
+        //     steps {}
+        // }
+    }
+    post{
+        cleanup{
+            sh "./scripts/cleanUp.sh"
+        }
+        always{
+            echo "Job $env.JOB_NAME has finished."
+        }
+        success{
+            echo "Build $env.BUILD_NUMBER was successful."
+        }
+        failure{
+            echo "Build $env.BUILD_NUMBER has failed."
+            mail bcc: '', cc: '', from: 'no-reply@jenkins', replyTo: '',  
+                 body: """ Tests input in the atteched file.\nFor more information, check console output at 
+                 <a href="${env.BUILD_URL}">${env.JOB_NAME}</a>""",  subject: "Status of  ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} ", 
+                 to: 'ofer.rvd@gmail.com'
+        }
+    }
+}
