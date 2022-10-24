@@ -10,6 +10,7 @@ pipeline {
         stage('docker-build') {
             steps {
                 sh '''
+                export DOCKER_HOST=127.0.0.1:8080
                 cd application
                 docker-compose build
                 '''
