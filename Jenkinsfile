@@ -10,7 +10,6 @@ pipeline {
         stage('docker-build') {
             steps {
                 sh '''
-                sudo chmod 666 /var/run/docker.sock
                 cd application
                 docker-compose build
                 '''
