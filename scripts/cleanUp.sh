@@ -6,4 +6,5 @@ if [[ ! -z "$isConfFileExist" ]]; then
     rm /root/.docker/config.json
 fi
 
+cd application
 docker-compose down -v
