@@ -1,0 +1,103 @@
+
+	
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/style.css')}}" >
+  <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/emoji.css')}}" >
+		
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This project is for users to share their most used links with the world.">
+  <meta name="keywords" content="link, share, social networks, url, linktree, linkspace">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Ofer Ravid">
+  <title>LinkSpace | Share with the World</title>
+  <!-- <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon"> -->
+</head>
+<body>
+
+  <!-- LOGO AND NAVBAR -->
+
+  <header class="header">
+    <a class="logo" style="padding: 10px;">LinkSpace</a>
+
+  </header>
+
+  
+  <h3>Update links</h3>
+  <form action="/action3" method="POST">
+  {% for link in links %}
+	  Unique Object ID : {{ link['_id'] }}<br/>
+  <input type="text" name="_id" value="{{ link['_id'] }}" hidden>
+
+  <table>
+  <tr>
+  <td>Link</td><td> : </td><td><input type="text" name="link" value="{{ link['link'] }}" placeholder="{{ link['link'] }}"></td>
+  </tr>
+  <tr>
+  <td>Description</td><td> : </td><td><textarea type="text" name="desc" rows=3 cols=30 placeholder="{{ link['desc'] }}"> {{ link['desc'] }} </textarea></td>
+  </tr>
+  <tr>
+  <td>Date</td><td> : </td><td><input type="text" name="date" value="{{ link['date'] }}" placeholder="{{ link['date'] }}"></td>
+  </tr>
+  <tr>
+  <td>Subject</td><td> : </td><td><input type="text" name="Subject" value="{{ link['Subject'] }}" placeholder="{{ link['Subject'] }}"></td>
+  </tr>
+  </table>
+  {% endfor %}
+	  <button type="submit"> Update link </button>
+	  <br/>
+  </form>
+  <a href="/">Return to links List</a>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

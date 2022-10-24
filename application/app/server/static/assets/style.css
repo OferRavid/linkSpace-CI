@@ -1,0 +1,235 @@
+body, html {height: 100%}
+body {
+  color:seashell;
+}
+
+
+
+
+table {
+  margin:  10px;
+}
+
+h1 ,b {
+color:seagreen;
+}
+
+button{
+  padding: 10px;
+  color: white;
+  transition: background-color .2s;
+  background-color: #474545b9;
+  /* background-color: #4CAF50; Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+/* 
+a, a:visited {
+  background-color: black;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: grey;
+} */
+
+
+
+
+
+/* IMPORTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+/* GLOBAL SETTINGS */
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: none;
+  text-decoration: none; 
+}
+
+body{
+  background-color: #222121;
+  padding-top: 50px;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+/* NAV AND LOGO */
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #313131;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-family: 'Grandstander';
+  margin-bottom: 20px;
+}
+
+.header .logo{
+  color: white;
+  padding: 0 20px;
+  font-size: large;
+}
+
+.nav{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav li{
+  padding: 10px;
+}
+
+.nav li p{
+  display: block;
+  padding: 10px;
+  color: white;
+  transition: background-color .2s;
+}
+
+.nav li p:hover{
+  background-color: #474545b9;
+}
+
+.active{
+  background-color: #474545b9;
+}
+
+/* MAIN SECTION */
+
+.main-sec{
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.profile{
+  padding: 20px;
+}
+
+.profile img{
+  height: 150px;
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.profile p{
+  color: white;
+  padding: 10px;
+  font-family: 'Grandstander';
+  font-weight: 700;
+}
+
+.links{
+  width: 100%;
+}
+
+.links li{
+  box-sizing: border-box;
+  padding: 0;
+  margin-bottom: 15px;
+  background-color: rgba(31, 73, 87, 0);
+  border: 2px solid rgb(221, 219, 219);
+}
+
+.links li p{
+  background-color:rgb(24, 100, 55);
+  color: rgb(24, 22, 22);
+  padding: 15px 20px;
+  display: block;
+  transition: all .2s;
+}
+
+.links li p:hover{
+  background-color: rgba(243, 243, 243, 0);
+  color: aliceblue;
+}
+
+/* LINKS SECTION */
+
+.remove{
+  display: none;
+}
+
+.links-sec{
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.links-sec h1{
+  padding-top: 40px;
+  padding-bottom: 30px;
+  color: whitesmoke;
+  font-family: 'Grandstander';
+  font-size: 2rem;
+}
+
+.links-sec2{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.links-sec2 li{
+  height: 50px;
+  width: 150px;
+  margin: 10px;
+  padding: 0;
+  background-color: rgba(31, 73, 87, 0);
+  border: 2px solid rgb(221, 219, 219);
+}
+
+.links-sec2 li p{
+  background-color: rgb(243, 243, 243);
+  color: rgb(24, 22, 22);
+  padding: 16px 20px;
+  display: block;
+  transition: all .2s;
+}
+
+.links-sec2 li p:hover{
+  background-color: rgba(243, 243, 243, 0);
+  color: aliceblue;
+}
+
+/* RESPONSIVE SETTINGS*/
+
+@media (max-width: 700px){
+  body{
+    width: 100%;
+  }
+  .main-sec{
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .nav{
+    flex-wrap: nowrap;
+    text-align: center;
+  }
+
+}

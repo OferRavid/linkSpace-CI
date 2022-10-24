@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>{{t}}</title>
+		<!-- href="/static/assets/style.css"-->
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/style.css')}}" >
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/emoji.css')}}" >
+		<script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>  
+		<script src="{{ url_for('static',filename='assets/emoji.js')}}"></script>
+	</head>
+
+	
+		
+<body>
+	<h1>{{ h }}</h1>
+	<hr>
+	{% if links[0] %}
+	<div span="margin-left">
+	<form action="/search"	method="GET" >
+		<table class="none" id="close">
+		<tr>
+		<td><big><b>Search Subject:</b></big></td>
+		<td><input type="text" name="key" placeholder="Search..." size="15" /></td>
+		<td><button type="submit">Search</button></td>
+		<td></td><td></td>
+		</tr>
+		</table>
+	</form>
+	</div>
+	<b><big>link list :</big></b>
+	<table class="none">
+	    <tr id="row">
+	    	<th class="name">Link</th>
+	    	<th class="desc">Description link</th>
+	    	<th class="date">Date</th>
+	    	<th class="Subject">Subject</th>
+		<th class="func1">Remove</th>
+		<th class="func2">Modify</th>
+	    </tr>
+	{% for link in links %}
+		<tr >
+			<!-- <td><a href="./done?_id={{ link['_id'] }}"><input type="image" src="static/images/{{link['done']}}.png" alt="Submit ME"></a></td> -->
+			<td ><a href="https://www.w3schools.com/" >{{ link["link"] }}</a></td>
+			<td class="desc">{{ link["desc"] }}</td>
+			<td class="date">{{ link["date"] }}</td>
+			<td class="Subject">{{ link["Subject"] }}</td>
+			<td class="func1"><a href="./remove?_id={{ link['_id'] }}"><button type="submit">DELETE</button></a></td>
+			<td class="func1"><a href="./update?_id={{ link['_id'] }}"><button type="submit">EDIT</button></a></td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% else %}
+		<h4>No Links in the List !!</h4>
+	{% endif %}
+	<hr/>
+	<form action="/action" method="POST">
+
+	<b><big><label>Add a link : </label></big></b><br>
+		<input type="text" name="link" placeholder="link" /><br>
+		<br><textarea name="desc" rows="1" cols="30" placeholder="Enter Description here..." ></textarea><br>
+		<br><input type="text" name="date" placeholder="Date" /><br>
+		<br><input type="text" name="Subject" placeholder="Subject" /><br>
+		<br><button type="submit"> Create </button><br>
+	</form>
+
+</body>
+</html>
