@@ -10,7 +10,7 @@ pipeline {
         stage('docker-build') {
             steps {
                 sh '''
-                cd applications
+                cd application
                 docker-compose build
                 '''
             }
