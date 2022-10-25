@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 is_healthy() {
-    proxy_health_status="$(docker inspect -f "{{.State.Status}}" proxy)"
+    nginx_health_status="$(docker inspect -f "{{.State.Status}}" nginx)"
     mongo_health_status="$(docker inspect -f "{{.State.Status}}" mongodb)"
     flask_health_status="$(docker inspect -f "{{.State.Status}}" flask)"
-    if [ "$proxy_health_status" = "running" ] && [ "$mongo_health_status" = "running" ] && [ "$flask_health_status" = "running" ]; then
+    if [ "$nginx_health_status" = "running" ] && [ "$mongo_health_status" = "running" ] && [ "$flask_health_status" = "running" ]; then
         return 0
     else
         return 1
