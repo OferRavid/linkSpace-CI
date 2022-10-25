@@ -17,7 +17,13 @@ pipeline {
         }
         stage('e2e-test') {
             steps {
-                sh "./scripts/e2e-test.sh"
+                echo "==============E2E test on the application====================="  
+                sh ''' 
+                cd /application
+                docker-compose up -d
+                ./scripts/wait-for-docker-compose.sh 60
+                ./scripts/e2e-test.sh
+                '''
             }
         }
         stage('tag') {
