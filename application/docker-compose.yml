@@ -29,7 +29,7 @@ services:
         build: nginx
         container_name: nginx
         ports:
-            - "80:80"
+            - "81:81"
         volumes: 
         - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
         - ./app/server/:/usr/share/nginx/html/static
