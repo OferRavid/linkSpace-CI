@@ -22,7 +22,7 @@ pipeline {
         }
         stage('tag') {
             steps {
-                sh "exit 1"
+                echo "tagging"
             }
         }
         // stage('publish') {
