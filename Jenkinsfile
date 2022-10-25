@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo "==============E2E test on the application====================="  
                 sh ''' 
-                cd /application
+                cd application
                 docker-compose up -d
                 ./scripts/wait-for-docker-compose.sh 60
                 ./scripts/e2e-test.sh
