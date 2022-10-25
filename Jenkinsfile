@@ -22,7 +22,7 @@ pipeline {
                 cd application
                 docker-compose up -d
                 ../scripts/wait-for-docker-compose.sh 60
-                #../scripts/e2e-test.sh
+                ../scripts/e2e-test.sh
                 '''
             }
         }
