@@ -18,7 +18,8 @@ pipeline {
         stage('e2e-test') {
             steps {
                 echo "==============E2E test on the application====================="  
-                sh ''' 
+                sh '''
+                systemctl restart docker.socket docker.service
                 cd application
                 docker-compose up -d
                 ./scripts/wait-for-docker-compose.sh 60
