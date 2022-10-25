@@ -1,5 +1,5 @@
 #!/bin/bash
-docker exec flask pytest -v > testResult.txt 
+docker exec flask pytest /tests/test_all.py -v > testResult.txt 
 isTestsPassed=$(cat testResult.txt | grep "1 passed")
 if [[ -z "$isTestsPassed" ]]; then
     echo 'failure'
