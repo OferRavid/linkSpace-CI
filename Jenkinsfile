@@ -41,9 +41,9 @@ pipeline {
         // }
     }
     post{
-        // cleanup{
-        //     sh "./scripts/cleanUp.sh"
-        // }
+        cleanup{
+            sh "./scripts/cleanUp.sh"
+        }
         always{
             echo "Job $env.JOB_NAME has finished."
         }
