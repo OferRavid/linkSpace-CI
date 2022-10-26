@@ -36,11 +36,11 @@ pipeline {
                     }
                     
                 }
-                echo $NEW_TAG
+                echo "${NEW_TAG}"
                 sh '''
                 git clean -f
-                git tag -a $NEW_TAG -m "aading new tag: $NEW_TAG"
-                git push -u origin $NEW_TAG
+                git tag -a ${NEW_TAG} -m "aading new tag: ${NEW_TAG}"
+                git push -u origin ${NEW_TAG}
                 '''
             }
         }
