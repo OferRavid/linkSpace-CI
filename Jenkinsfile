@@ -36,19 +36,12 @@ pipeline {
                     }
                     
                 }
-                echo "${NEW_TAG}"
                 sh "./scripts/add_tag.sh ${NEW_TAG}"
-                // sh '''
-                // git clean -f
-                // git tag -a ${NEW_TAG} -m "aading new tag: ${NEW_TAG}"
-                // git push -u origin ${NEW_TAG}
-                // '''
             }
         }
         stage('publish') {
             steps {
-                // sh "./scripts/publish2ecr.sh"
-                echo "${NEW_TAG}"
+                sh "./scripts/publish2ecr.sh ${NEW_TAG}"
             }
         }
         // stage('deploy') {

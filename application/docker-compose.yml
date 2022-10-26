@@ -11,10 +11,10 @@ services:
             - db
         ports:
          - "27017"
-    flask:
+    linkSpace:
         build:  app
-        image: imageflask
-        container_name: flask
+        image: linkSpace
+        container_name: linkSpace
         env_file:
         - mongo.env
         depends_on:
