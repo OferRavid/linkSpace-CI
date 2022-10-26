@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 NEW_TAG=$1
 
