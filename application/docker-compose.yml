@@ -11,10 +11,10 @@ services:
             - db
         ports:
          - "27017"
-    linkSpace:
+    linkspace:
         build:  app
-        image: linkSpace
-        container_name: linkSpace
+        image: linkspace
+        container_name: linkspace
         env_file:
         - mongo.env
         depends_on:
@@ -36,7 +36,7 @@ services:
         networks:
             frontend:
         depends_on:
-            - linkSpace
+            - linkspace
 networks:
     frontend:
     db:
