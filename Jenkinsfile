@@ -24,8 +24,8 @@ pipeline {
             steps {
                 script {
                     sh "git fetch --tags || true"
-                    is_tagged = sh(script: "git tag", returnStdout: true).trim().isEmpty()
-                    if (is_tagged) {
+                    tags = sh(script: "git tag", returnStdout: true).trim()
+                    if (tags.length() > 1) {
                         tag_tail = sh(script: "git describe  --abbrev=0  --tags", returnStdout: true).trim()
                         NEW_TAG=tag_tail.split('\\.')
                         NEW_TAG[2]=NEW_TAG[2].toInteger()+1
