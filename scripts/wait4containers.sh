@@ -2,8 +2,8 @@
 is_healthy() {
     nginx_health_status="$(docker inspect -f "{{.State.Status}}" nginx)"
     mongo_health_status="$(docker inspect -f "{{.State.Status}}" mongodb)"
-    flask_health_status="$(docker inspect -f "{{.State.Status}}" flask)"
-    if [ "$nginx_health_status" = "running" ] && [ "$mongo_health_status" = "running" ] && [ "$flask_health_status" = "running" ]; then
+    linkspace_health_status="$(docker inspect -f "{{.State.Status}}" linkspace)"
+    if [ "$nginx_health_status" = "running" ] && [ "$mongo_health_status" = "running" ] && [ "$linkspace_health_status" = "running" ]; then
         return 0
     else
         return 1
@@ -13,7 +13,7 @@ is_healthy() {
 timer=0
 while ! is_healthy; do 
     if [ $timer = $1 ]; then
-        echo "Docker-compose command didn't complete within" $1 "seconds. Check your code." > testResult.txt 
+        echo "containers didn't start within" $1 "seconds. Check your code." > testResult.txt 
         exit 1
     fi
     sleep 1
