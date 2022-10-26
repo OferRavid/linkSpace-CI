@@ -24,15 +24,17 @@ pipeline {
             steps {
                 script {
                     sh "git fetch --tags || true"
-                    tag_tail = sh(script: "git describe  --abbrev=0  --tags", returnStdout: true).trim()  
-                    if (tag_tail.isEmpty()) {                        
-                        NEW_TAG='1.0.0'
-                    }
-                    else {
+                    is_tagged = sh(script: "git tag", returnStdout: true).trim().isEmpty()
+                    if (is_tagged) {
+                        tag_tail = sh(script: "git describe  --abbrev=0  --tags", returnStdout: true).trim()
                         NEW_TAG=tag_tail.split('\\.')
                         NEW_TAG[2]=NEW_TAG[2].toInteger()+1
                         NEW_TAG=NEW_TAG.join('.')
                     }
+                    else {
+                        NEW_TAG='1.0.0'
+                    }
+                    
                 }
                 sh '''
                 git clean -f
