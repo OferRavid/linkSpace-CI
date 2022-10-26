@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        // stage('checkout') {
-        //     steps {
-        //         deleteDir()
-        //         checkout scm
-        //     }
-        // }
         stage('docker-build') {
             steps {
                 sh '''
@@ -28,14 +22,31 @@ pipeline {
         }
         stage('tag') {
             steps {
-                echo "tagging"
+                script {
+                    sh "git fetch --tags || true"
+                    tag_tail = sh(script: "git describe  --abbrev=0  --tags", returnStdout: true).trim()  
+                    if (tag_tail.isEmpty()) {                        
+                        NEW_TAG='1.0.0'
+                    }
+                    else {
+                        NEW_TAG=tag_tail.split('\\.')
+                        NEW_TAG[2]=NEW_TAG[2].toInteger()+1
+                        NEW_TAG=NEW_TAG.join('.')
+                    }
+                }
+                sh '''
+                git clean -f
+                git tag -a $NEW_TAG -m "aading new tag: $NEW_TAG"
+                git push -u origin $NEW_TAG
+                '''
             }
         }
-        // stage('publish') {
-        //     steps {
-        //         sh "./scripts/publish2ecr.sh"
-        //     }
-        // }
+        stage('publish') {
+            steps {
+                // sh "./scripts/publish2ecr.sh"
+                echo $NEW_TAG
+            }
+        }
         // stage('deploy') {
         //     steps {}
         // }
@@ -56,9 +67,9 @@ pipeline {
             //      body: """ Tests input in the atteched file.\nFor more information, check console output at 
             //      <a href="${env.BUILD_URL}">${env.JOB_NAME}</a>""",  subject: "Status of  ${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} ", 
             //      to: 'ofer.rvd@gmail.com'
-            // emailext body: 'Check console output at $BUILD_URL to view the results. /n/n ${CHANGES} /n/n -------------------------------------------------- /n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-            //         to: "ofer.rvd@gmail.com", 
-            //         subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            emailext body: 'Check console output at $BUILD_URL to view the results. /n/n ${CHANGES} /n/n -------------------------------------------------- /n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                    to: "ofer.rvd@gmail.com", 
+                    subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
         }
     }
 }
