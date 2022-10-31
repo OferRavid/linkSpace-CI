@@ -44,9 +44,11 @@ pipeline {
                 sh "./scripts/publish2ecr.sh ${NEW_TAG}"
             }
         }
-        // stage('deploy') {
-        //     steps {}
-        // }
+        stage('deploy') {
+            steps {
+                sh "./scripts/update-helm-chart.sh ${NEW_TAG}"
+            }
+        }
     }
     post{
         cleanup{
